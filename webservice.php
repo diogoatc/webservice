@@ -18,6 +18,7 @@ nome,qtd,localizacao) VALUES (?, ?, ?, ?)");
 		$stmt->execute();
 		$stmt->close();
 		echo "<h1>PEÇA INSERIDA COM SUCESSO</h1>";
+		header("refresh: 1.5;index.php");
 		
 		
 	}elseif(isset($_GET['idpeca'])) { //lista uma peça

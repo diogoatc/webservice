@@ -1,11 +1,8 @@
 <?php
-session_start();
+
 $recebe=$_GET['json'];
-echo $recebe;
 
 $dados_decode[] = json_decode($recebe,true);
-
-var_dump($dados_decode);
 
 foreach ($dados_decode as $dados){
 	if(is_array($dados)){
