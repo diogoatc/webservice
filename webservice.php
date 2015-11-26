@@ -4,8 +4,8 @@
 		$mysqli = new mysqli('localhost','root','','pecas');
 		if (mysqli_connect_errno()) trigger_error(mysqli_connect_error());
 		
-	//recebe e cadastra a peça no BD
-	if(isset($_GET['jsonins'])){
+	
+	if(isset($_GET['jsonins'])){    //recebe o json e cadastra a peça no BD
 		
 		$json=$_GET['jsonins'];
 		$decodejson=json_decode($json,true);
@@ -20,9 +20,7 @@ nome,qtd,localizacao) VALUES (?, ?, ?, ?)");
 		echo "<h1>PEÇA INSERIDA COM SUCESSO</h1>";
 		
 		
-	}else{
-	// Solicita o parâmetro "idpeca"  
-	if(isset($_GET['idpeca'])) {
+	}elseif(isset($_GET['idpeca'])) { //lista uma peça
 	
 	
 		$idpeca = $_GET['idpeca']; //guarda o valor do formulario na variavel
@@ -41,19 +39,16 @@ nome,qtd,localizacao) VALUES (?, ?, ?, ?)");
 			$json= json_encode($artigos);
 			header("location:puxa.php?json=$json");
 			
-		}else{
-			if(isset($_GET['listatudo'])){
+		}elseif(isset($_GET['listatudo'])){  //lista todas as peças
 				$sql= "SELECT * FROM listapecas";
 				$query= $mysqli->query($sql);
 				while ($dados = $query->fetch_array()){
 				$listatudo[]=array("idpeca"=>$dados['id'],"nome"=>$dados['nome'],"qtd"=>$dados['qtd'],"localizacao"=>$dados['localizacao']);
 				}
 				$json= json_encode($listatudo);
-				header("location:listatudo.php?$listatudo");
-			}
-		}
-		
-		
+				header("location:listatudo.php?json=$json");
+			}else {
+				echo "ERRO";	
 	}
 
 
