@@ -1,23 +1,22 @@
 <?php
 	session_start();
-	/* Solicita o parâmetro "usuario"  */
-	if(isset($_POST['usuario'])) {
+	/* Solicita o parâmetro "idpeca"  */
+	if(isset($_POST['idpeca'])) {
 	
-		/* verifica se a variável foi passada, ou define o valor das variáveis */
-		$numero_de_artigos = isset($_POST['artigos']) ? intval($_POST['artigos']) : 10; //10 é o padrão
-		$id_do_usuario = $_POST['usuario']; //sem valor padrão
+	
+		$idpeca = $_POST['idpeca']; //guarda o valor do formulario na variavel
 		/* conecta ao banco de dados */
-		$mysqli = new mysqli('localhost','root','','list');
+		$mysqli = new mysqli('localhost','root','','pecas');
 		if (mysqli_connect_errno()) trigger_error(mysqli_connect_error());
 		
 		/* seleciona os artigos do banco de dados */
-		$sql = "SELECT guid, post_title FROM wp_posts WHERE post_author = '$id_do_usuario' LIMIT $numero_de_artigos";
+		$sql = "SELECT * FROM listapecas WHERE id=$idpeca";
 		$query= $mysqli->query($sql);
 		
 		/* cria um array mestre com os registros */
 		$artigos = array();
 		while ($dados = $query->fetch_array()) {
-				$artigos[] = array("id"=>$dados['guid'], "Nome do post"=>$dados['post_title']);
+				$artigos[] =array($dados['id'],$dados['nome'],$dados['qtd'],$dados['localizacao']);
 			}
 		}
 		
