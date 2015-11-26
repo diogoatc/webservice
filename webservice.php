@@ -17,7 +17,7 @@
 		/* cria um array mestre com os registros */
 		$artigos = array();
 		while ($dados = $query->fetch_array()) {
-				$artigos[] = array("id do post"=>$dados['guid'], "Nome do post"=>$dados['post_title']);
+				$artigos[] = array("id"=>$dados['guid'], "Nome do post"=>$dados['post_title']);
 			}
 		}
 		
