@@ -22,8 +22,7 @@
 			$id=(int)$decodejson['id']; //o decode transforma esses dados em string, nós devolvemos pra int
 			$qtd=(int)$decodejson['qtd'];//o decode transforma esses dados em string, nós devolvemos pra int
 			
-			$stmt=$mysqli->prepare("INSERT INTO listapecas(id,
-nome,qtd,localizacao) VALUES (?, ?, ?, ?)");
+			$stmt=$mysqli->prepare("INSERT INTO listapecas(id,nome,qtd,localizacao) VALUES (?, ?, ?, ?)");
 			$stmt->bind_param('isis', $id, $decodejson['nome'], $qtd, $decodejson['localizacao']);
 			$stmt->execute();
 			$stmt->close();
@@ -71,14 +70,14 @@ nome,qtd,localizacao) VALUES (?, ?, ?, ?)");
 				
 				header("location: listatudo.php?list=$lista");
 				
-			}elseif(isset($_GET['delhtml'])){
+			}elseif(isset($_GET['delhtml'])){ //DELETA AS PEÇAS E FAZ UMA SAÍDA HTML
 				$id=$_GET['delhtml'];
 				deleta($id);
 				echo "Peça deletada com sucesso<br/>";
 				echo "<a href='index.php'> INDEX </a>";
 				
 				
-			}elseif(isset($_GET['deljson'])){
+			}elseif(isset($_GET['deljson'])){ //DELTA AS PEÇAS E FAZ UMA SAÍDA JSON
 				$id=$_GET['deljson'];
 				deleta($id);
 				$status=array("status"=>"deleted");
