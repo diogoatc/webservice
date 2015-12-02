@@ -17,7 +17,7 @@ if(isset($_POST['envia'])){
 	
 	$dados=array("id"=>$id, "nome"=>$nome, "qtd"=>$qtd, "localizacao"=>$localizacao);
 	$insertjson=json_encode($dados);
-	header("location:webservice.php?jsonins=$insertjson");
+	header("location:webservice.php?htmlins=$insertjson");
 	
 	
 }
